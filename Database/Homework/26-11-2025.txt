@@ -1,0 +1,23 @@
+create table Treatments (treatment_Id serial unique, Patient_Id serial primary key, Treatment_name varchar(100) not null,patient_name varchar(60) not null,Start_Date date not null,End_Date date not null);
+create table medications (Med_id smallint primary key, Med_name varchar(100) not null, Med_Type varchar(100) not null, price int default(0));
+insert into treatments (Treatment_name,patient_name,Start_Date,End_Date) values ('Physiotherapy','jega','2025-05-01','2025-05-15') ,('Physiotherapy','Ajithkumar','2025-05-01','2026-05-15'),('Physiotherapy','maddy','2025-07-01','2025-09-15');
+insert into medications  values (201,'Paracetamol','Tablet',25),(202,'IronTonic','Tonic',510),(203,'Anazin','Tablet',20),(204,'Pcetamol','Tablet',25);
+update treatments set End_date='2025-06-01' where treatment_Id=1;
+update medications set price=20 where med_name='Paracetamol';
+delete from Treatments where treatment_Id=1;
+delete from medications where price>500;
+select * from treatments where Patient_Id=103;
+select * from medications where Med_Type='Tablet';
+select * from medications;
+select * from Treatments;
+select * from patients
+drop table Treatments;
+drop table medications;
+drop table patients;
+create table Patients (Patient_Id serial,foreign key (Patient_Id) references treatments(Patient_Id),Patient_name varchar(100) not null,Admission_Date date not null,Discharge_Date date not null);
+insert into patients (patient_name,Admission_date,Discharge_Date)values ('jega','2025-05-01','2025-05-15') ,('Ajithkumar','2025-05-01','2026-05-15'),('maddy','2025-07-01','2025-09-15');
+SELECT t.Patient_Id, t.Start_Date, T.treatment_Id, p.patient_name
+FROM Treatments t
+JOIN patients p ON t.Patient_Id = p.Patient_Id;
+
+

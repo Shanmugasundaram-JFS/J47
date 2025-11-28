@@ -1,0 +1,34 @@
+create table doctors(doctor_id smallint not null , DR_Name varchar(50) not null, DR_Specialization varchar(50) not null, experience_years int not null);
+create table patients(patient_id smallint not null, Patient_Name varchar(50) not null, age smallint not null, gender char(1) not null);
+create table appointments(app_id smallint not null, doctor_id smallint not null, patient_id smallint not null, appointment_date date not null);
+INSERT INTO doctors (doctor_id, DR_Name, DR_Specialization, experience_years) VALUES
+(1, 'Shankar', 'Cardiology', 12),
+(2, 'Anitha', 'Neurology', 8),
+(3, 'Ravi', 'Orthopedics', 15),
+(4, 'Surya', 'Cardiology', 9),
+(5, 'Latha', 'Dermatology', 11);
+
+INSERT INTO patients (patient_id, Patient_Name, age, gender) VALUES
+(1, 'Raj', 35, 'M'),
+(2, 'Priya', 42, 'F'),
+(3, 'Ramesh', 28, 'M'),
+(4, 'Sneha', 50, 'F'),
+(5, 'Arjun', 60, 'M');
+INSERT INTO appointments (app_id, doctor_id, patient_id, appointment_date) VALUES
+(1, 1, 1, '2025-05-10'),
+(2, 1, 2, '2025-05-12'),
+(3, 2, 3, '2025-05-13'),
+(4, 3, 4, '2025-05-20'),
+(5, 1, 5, '2025-05-15'),
+(6, 3, 1, '2025-05-25'),
+(7, 4, 2, '2025-05-29');
+select * from doctors where DR_Specialization='Cardiology';
+select * from patients where age between 30 and 50;
+select * from doctors where experience_years>10;
+select * from patients where gender!='M';
+select * from appointments order by appointment_date desc;
+select *from doctors where DR_Specialization IN ('Neurology', 'Orthopedics');
+select * from doctors where DR_Name like 'S%';
+select doctor_id,count(*) from appointments group by doctor_id;
+select doctor_id,count(*) from appointments group by doctor_id having doctor_id>2;
+select * from appointments order by appointment_date desc fetch first 5 rows only;

@@ -1,0 +1,39 @@
+create table products(product_id smallint not null, Product_Name varchar(50) not null, price int not null,Product_Category varchar(60) not null);
+create table customers(customer_id smallint not null, Customer_Name varchar(70) not null, city varchar(30) not null);
+create table orders(order_id smallint not null, product_id smallint not null, customer_id smallint not null, quantity int not null, order_date date);
+INSERT INTO products (product_id, Product_Name, price, Product_Category) VALUES
+(1, 'Mango Juice', 120, 'Beverages'),
+(2, 'Milk', 60, 'Dairy'),
+(3, 'Butter', 150, 'Dairy'),
+(4, 'Banana', 30, 'Fruits'),
+(5, 'Masala Chips', 40, 'Snacks'),
+(6, 'Cola', 45, 'Beverages');
+INSERT INTO customers (customer_id, Customer_Name, city) VALUES
+(1, 'Karthik', 'Chennai'),
+(2, 'Divya', 'Madurai'),
+(3, 'Suresh', 'Trichy'),
+(4, 'Priya', 'Chennai'),
+(5, 'Ramya', 'Coimbatore');
+INSERT INTO orders (order_id, product_id, customer_id, quantity, order_date) VALUES
+(1, 1, 1, 2, '2025-05-25'),
+(2, 2, 2, 1, '2025-05-26'),
+(3, 3, 3, 1, '2025-05-27'),
+(4, 1, 4, 1, '2025-05-28'),
+(5, 5, 2, 3, '2025-05-20'),
+(6, 6, 5, 2, '2025-05-29');
+select * from products where price between 100 and 500;
+select * from products where Product_Category!='Snacks' ;
+select * from products where product_name LIKE '%a';
+select * from products where Product_Category IN ('Beverages', 'Dairy');
+select order_id,count(*) from orders group by order_id;
+select customer_id from orders group by customer_id having count(distinct product_id) > 3;
+select * from products order by price;
+select * from products order by price desc fetch first 3 rows only;
+select * from customers where city!='Chennai' ;
+select * from orders where order_date >= CURRENT_DATE - INTERVAL '7 days';
+select * from orders order by order_date desc fetch first 3 rows only;
+
+
+
+
+

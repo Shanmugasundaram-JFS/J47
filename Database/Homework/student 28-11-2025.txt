@@ -1,0 +1,35 @@
+create table students(student_id smallint not null, Student_Name varchar(60) not null, age smallint not null, class varchar(60) not null);
+create table courses(course_id smallint not null, Course_Name varchar(30) not null);
+create table enrollments(enroll_id smallint not null, student_id smallint not null, course_id smallint not null, enroll_date date);
+INSERT INTO students (student_id, Student_Name, age, class) VALUES
+(1, 'Kannan', 18, '10A'),
+(2, 'Janani', 17, '11B'),
+(3, 'Aravind', 20, '12B'),
+(4, 'Sanjay', 19, '10A'),
+(5, 'Revathi', 16, '9C');
+INSERT INTO courses (course_id, Course_Name) VALUES
+(1, 'Mathematics'),
+(2, 'Physics'),
+(3, 'Chemistry'),
+(4, 'Biology'),
+(5, 'Computer Science');
+INSERT INTO enrollments (enroll_id, student_id, course_id, enroll_date) VALUES
+(1, 1, 1, '2025-01-10'),
+(2, 2, 2, '2025-01-15'),
+(3, 1, 3, '2025-01-17'),
+(4, 3, 1, '2025-02-10'),
+(5, 3, 2, '2025-02-11'),
+(6, 3, 3, '2025-02-12'),
+(7, 4, 1, '2025-03-01');
+select * from students where age>=18;
+select * from students where Student_Name LIKE '%an%';
+select * from students where class!='10A'
+select course_id,count(*) from enrollments group by course_id;
+select course_id from enrollments group by course_id having count(*) > 5;
+select * from students order by age desc;
+select * from students order by age fetch first 3 rows only;
+select * from students where class IN ('10A', '12B');
+select * from students where age not between 16 and 19;
+select s.student_id, s.student_name from students s left join enrollments e on s.student_id = e.student_id where e.student_id IS NULL;
+
+

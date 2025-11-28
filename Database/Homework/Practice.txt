@@ -1,0 +1,32 @@
+1.create table Students (Stu_id serial primary key, Stu_name varchar(100) not null, Stu_Department_name varchar(100) not null, Stu_Age int default(18),Stu_gender Varchar(8) not null);
+2.create table Medicines (med_id serial primarykey, med_name varchar(100) not null, manufacture_name varchar(100) not null, price int default(0));
+3.create table Doctors (DR_id serial primary key, DR_name varchar(100) not null, DR_Specialization varchar(100) not null, DR_Phone Varchar(12) unique);
+4.create table Products (Product_id serial primary key, Product_name varchar(100) not null, Product_Price int  not null, Product_Stock int default(0),Product_Cateogry varchar(60) not null);
+5.create table Bookings (Booking_id serial primary key, Customer_name varchar(100) not null, Product_Price int  not null, Vehicle_Number varchar(10) not null,Service_Type varchar(100) not null);
+6.create table Tickets (Ticket_id serial primary key, Movie_name varchar(100) not null, Theater_name varchar(100) not null, Seat_Number varchar(10) not null);
+7.create table Books (Book_id serial primary key, Book_Title varchar(100) not null, Book_Author varchar(100) not null, Book_Genere varchar(50) not null,Published_Year int not null);
+8.create table Employees (Emp_id serial primary key, Emp_Name varchar(100) not null, Emp_Desigination varchar(50) not null, Emp_Salary decimal default(15000.00),Emp_Join_date date not null);
+9.create table Courses (Course_id serial primary key, Course_Name varchar(100) not null, Course_Instructor varchar(50) not null, Duration_In_Hours int not null,Course_Fees decimal not null);
+10.create table Events (Event_id int primary key, Event_Name varchar(100) not null, Event_Date date not null, Event_Location varchar(50) not null,Event_Organiser_Name varchar(60) not null);
+
+
+insert into students (Stu_name,Stu_Department_name,Stu_age,Stu_gender) values ('ss','cse',36,'male');
+insert into students (Stu_name,Stu_Department_name,Stu_age,Stu_gender) values ('jaga','mech',22,'male');
+select * from students
+
+insert into medicines (med_name,manufacture_name,price) values ('cough syrub','abbott',156);
+insert into medicines (med_name,manufacture_name,price) values ('Fever Syrub','abbott',136);
+select * from medicines
+
+insert into doctors (DR_name,DR_Specialization,DR_Phone) values ('Arjun','Ortho','9843717710');
+insert into doctors (DR_name,DR_Specialization,DR_Phone) values ('Gayathiri','DGO','9994617710');
+select * from doctors
+
+insert into employees (emp_name,emp_desigination,emp_salary,Emp_Join_date) values ('Rajesh','Client_support','12000.00','2024-03-21');
+insert into employees (emp_name,emp_desigination,emp_salary,Emp_Join_date) values ('Mohan','Client_support','17000.00','2024-01-01');
+
+select * from employees
+
+
+
+
