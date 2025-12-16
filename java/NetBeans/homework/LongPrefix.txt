@@ -1,0 +1,46 @@
+public class PrefixMain 
+{
+    public static void main(String[] args) 
+{
+       
+        String str[]={"java","jam","jar"};
+        
+        LPrefix obj=new LPrefix();
+        String result=obj.LongPrefix(str);
+        
+        System.out.println(result);
+    }
+    
+}
+
+public class LPrefix 
+{
+ 
+   
+    public String LongPrefix(String[] str)
+    {
+    if(str.length == 0)
+    {
+    return " ";
+    }
+    
+        for (int i = 0; i < str[0].length(); i++) {
+            
+           char currentchar=str[0].charAt(i);
+           
+            for (int j = 1; j < str.length; j++) {
+                
+                if(i==str[j].length()||str[j].charAt(i)!=currentchar)
+                        {
+                        return str[0].substring(0, i);
+                        }
+                
+            }
+            
+        }
+    
+    
+    return str[0];
+    }
+}
+    

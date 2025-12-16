@@ -1,0 +1,13 @@
+select * from employees
+insert into employees values(1,'Selva',34,35200,1,'2011-03-01'),
+(2,'Rajesh',35,15200,3,'2024-03-01'),
+(3,'Jega',25,17200,2,'2024-06-01'),
+(4,'Maddy',23,15200,3,'2024-07-01'),
+(5,'Dhaya',22,25200,1,'2015-05-01');
+select * from employees where salary>50000;
+select * from employees order by salary desc;
+select dept_id,count(*) from employees group by dept_id;
+select salary,count(*) from employees group by salary having avg(salary)>50000;
+SELECT * FROM employees WHERE emp_name LIKE '%a%';
+SELECT * FROM employees ORDER BY emp_id LIMIT 5 OFFSET 5;
+
