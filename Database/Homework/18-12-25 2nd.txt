@@ -1,0 +1,91 @@
+create table KYC(
+cus_id int primary key,
+cus_name varchar,
+cus_phno bigint,
+cus_adhar int,
+cus_add varchar,
+username varchar,
+psswd varchar
+)
+create table KYC_primary(
+cus_id int primary key,
+cus_name varchar,
+cus_phno bigint,
+cus_adhar int,
+cus_add varchar
+)
+
+create or replace function kyc_insert()
+returns trigger as $$
+begin
+insert into KYC_primary values(new.cus_id,new.cus_name,new.cus_phno,
+new.cus_adhar,
+new.cus_add);
+return new;
+end;
+$$ language plpgsql;
+
+create or replace function kyc_update()
+returns trigger as $$
+begin
+update KYC_primary set cus_adhar=new.cus_adhar where cus_id=new.cus_id;
+return new;
+end;
+$$ language plpgsql;
+
+create or replace function kyc_delete()
+returns trigger as $$
+begin
+delete from KYC_primary where cus_id=old.cus_id;
+return old;
+end;
+$$ language plpgsql;
+
+create or replace function kyc_overall()
+returns trigger as $$
+begin
+if tg_op='insert' then
+perform kyc_insert();
+elseif tg_op='update' then
+perform kyc_update();
+elseif tg_op='delete' then
+perform kyc_delete();
+else
+perform kyc_bkup();
+return old;
+end if;
+if tg_op='delete'then 
+return old;
+else 
+return new;
+end if;
+end;
+$$ language plpgsql;
+
+create trigger kyc_df after insert on KYC 
+for each row execute function kyc_insert()
+create trigger up_kyc after update on KYC
+for each row execute function kyc_update()
+create trigger kycdel after delete on KYC
+for each row execute function kyc_delete()
+
+INSERT INTO KYC 
+(cus_id, cus_name, cus_phno, cus_adhar, cus_add, username, psswd)
+VALUES
+(1, 'Arun Kumar', 9876543210, 123456789, 'Chennai, TN', 'arun_k', 'pass123'),
+(2, 'Priya Sharma', 9123456780, 234567890, 'Coimbatore, TN', 'priya_s', 'priya@2025'),
+(3, 'Ravi Patel', 9988776655, 345678901, 'Ahmedabad, GJ', 'ravi_p', 'ravi#pwd'),
+(4, 'Sneha Reddy', 9876501234, 456789012, 'Hyderabad, TS', 'sneha_r', 'sneha@123'),
+(5, 'Vikram Singh', 9123409876, 567890123, 'Delhi, DL', 'vikram_s', 'vikram2025'),
+(6, 'Meena Iyer', 9988123456, 678901234, 'Mumbai, MH', 'meena_i', 'meena_pwd'),
+(7, 'Karthik Raj', 9876123450, 789012345, 'Madurai, TN', 'karthik_r', 'karthik@pass'),
+(8, 'Anjali Verma', 9123987654, 890123456, 'Lucknow, UP', 'anjali_v', 'anjali@2025'),
+(9, 'Suresh Das', 9988001122, 901234567, 'Kolkata, WB', 'suresh_d', 'suresh_pwd'),
+(10, 'Divya Nair', 9876009876, 112233445, 'Kochi, KL', 'divya_n', 'divya@pass');
+select * from KYC
+delete from KYC
+select * from KYC_primary
+update KYC set cus_adhar='984301254' where cus_id=1
+delete from KYC where cus_id=10
+
+
